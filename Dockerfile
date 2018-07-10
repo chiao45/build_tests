@@ -10,7 +10,7 @@ ARG BITBUCKET_USER
 ADD image $DOCKER_HOME/
 
 # lbcalculix
-RUN git clone --depth=1 -b master https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/libcalculix.git && \
+RUN git clone --depth=1 -b next https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/libcalculix.git && \
     cd libcalculix && \
     make && \
     make test
