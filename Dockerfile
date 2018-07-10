@@ -7,11 +7,10 @@ WORKDIR /tmp
 ARG BITBUCKET_PASS
 ARG BITBUCKET_USER
 
-# lbcalculix
-RUN git clone --depth=1 -b master https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/libcalculix.git && \
-    cd libcalculix && \
-    make && \
-    make test
+ADD install_libofm /tmp/
+
+# libofm
+RUN env BITBUCKET_PASS=$BITBUCKET_PASS BITBUCKET_USER=$BITBUCKET_USER ./install_libofm
 
 RUN rm -rf /tmp/*
 
