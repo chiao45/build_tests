@@ -5,7 +5,7 @@ services: docker
 
 env:
   global:
-    - BASE=unifem/coupler-desktop:latest VERSION=libccx_build_test_master
+    - BASE=unifem/coupler-desktop:latest VERSION=pyccx_build_test_master
 
 
 before_script:
