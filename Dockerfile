@@ -11,7 +11,13 @@ ARG BITBUCKET_USER
 RUN git clone --depth=1 -b master https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/libcalculix.git && \
     cd libcalculix && \
     make && \
-    make test
+    make test && make install
+    
+# pyccx
+RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.org/${BITBUCKET_USER}/pyccx.git && \
+    cd pyccx && \
+    python3 setup.py install && \
+    cd tests && python3 ccx.py && python3 ccx_sb.py
 
 RUN rm -rf /tmp/*
 
