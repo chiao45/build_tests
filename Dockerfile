@@ -1,5 +1,4 @@
-FROM unifem/coupler-desktop:latest
-LABEL maintainer "Qiao Chen <benechiao@gmail.com>"
+FROM unifem/coupler-desktop:latest as base
 
 USER root
 WORKDIR /tmp
@@ -21,6 +20,13 @@ RUN git clone --depth=1 https://${BITBUCKET_USER}:${BITBUCKET_PASS}@bitbucket.or
 RUN cd pyccx/tests && python3 ccx.py && python3 ccx_sb.py
 
 RUN rm -rf /tmp/*
+
+WORKDIR $DOCKER_HOME
+USER root
+
+### dummy 2nd stage
+FROM unifem/coupler-desktop:latest
+LABEL maintainer "Qiao Chen <benechiao@gmail.com>"
 
 RUN chown -R $DOCKER_USER:$DOCKER_GROUP $DOCKER_HOME
 
