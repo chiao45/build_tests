@@ -25,6 +25,11 @@ COPY --from=base $DOCKER_HOME/apps .
 RUN echo ". /opt/openfoam5/etc/bashrc\n./configure --python\n./Allwmake\n" > ./libofm/install.sh && \
     cd libofm && bash install.sh
   
+RUN apt-get update -y && apt-get install openfoam6 -y && cd libofm && \
+    echo ". /opt/openfoam5/etc/bashrc\n./Allwclean python\n" > ./clean.sh && bash ./clean.sh && \
+    echo ". /opt/openfoam6/etc/bashrc\n./configure --python\n./Allwmake\n" > ./install.sh && \
+    bash install.sh
+  
 RUN rm -rf /tmp/*
 
 WORKDIR $DOCKER_HOME
