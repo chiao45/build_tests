@@ -22,8 +22,9 @@ WORKDIR /tmp
 
 COPY --from=base $DOCKER_HOME/apps .
 
-RUN echo ". /opt/openfoam5/etc/bashrc\n./configure --python\n./Allwmake\n" > ./libofm/install.sh && \
-    cd libofm && bash install.sh
+RUN cd libofm && \
+    ./configure --python && \
+    ./Allwmake
 
 # NOTE test image is based on 17.10, where foam6 is not available
 # RUN apt-get update -y && apt-get install openfoam6 -y && cd libofm && \
