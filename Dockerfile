@@ -22,8 +22,9 @@ WORKDIR /tmp
 
 COPY --from=base $DOCKER_HOME/apps .
 
+# build python inplace
 RUN cd libofm && \
-    ./configure --python && \
+    echo ". /opt/openfoam5/etc/bashrc\n./configure --python" | bash && \
     ./Allwmake
 
 # NOTE test image is based on 17.10, where foam6 is not available
